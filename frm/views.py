@@ -36,9 +36,10 @@ def contact(request,pk):
             cd = form.cleaned_data
             blog = get_object_or_404(Hereglegch, pk=pk)
             Hereglegch.objects.create(
-               blog = blog,
-               name = cd.name,
-               code = cd.code
+            #    blog = blog,
+            #    name = cd.name,
+            #    code = cd.code
+            text=request.POST[]
            )
              # assert False
             # con = get_connection('django.core.mail.backends.console.EmailBackend')
