@@ -10,7 +10,18 @@ from .forms import NameForm,ContactForm
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail, get_connection
 
+def createpost(request):
+        if request.method == 'POST':
+            if request.POST.get('title') and request.POST.get('content'):
+                post=Post()
+                post.title= request.POST.get('title')
+                post.content= request.POST.get('content')
+                post.save()
+                
+                return render(request, 'posts/create.html')  
 
+        else:
+                return render(request,'posts/create.html')
 
 @csrf_exempt
 def contact(request,pk):
@@ -39,7 +50,8 @@ def contact(request,pk):
             #    blog = blog,
             #    name = cd.name,
             #    code = cd.code
-            text=request.POST[]
+
+            # text=request.POST[]
            )
              # assert False
             # con = get_connection('django.core.mail.backends.console.EmailBackend')
