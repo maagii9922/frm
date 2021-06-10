@@ -4,20 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="{% static '/style.css' %}" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    {% if latest_question_list %}
+    {% csrf_token %}
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}        
+        <input type="submit" value="Хадгалах">
+    </form>  -->
+
+    {% block content %}
+      <h3>Contact</h3>
+      
+        {% if submitted %}
+            <p class="success">
+            Амжилттай хадгаллаа.
+        </p>
+        
+        {% else %}
+        <form action="" method="post" novalidate>
+        <table>
+            {{ form.as_table }}
+            <tr>
+            <td>&nbsp;</td>
+            <td><input class="sub" type="submit" value="Хадгалах"></td>
+            </tr>
+        </table>
+        {% csrf_token %}
+        </form>
+        {% endif %}
+    {% endblock content %}
+    <!-- <form>
+        <p>First Name: <input type="text" name="firstname"></p>
+        <p>Last Name: <input type="text" name="lastname"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form> -->
+
+    <!-- {% if latest_question_list %}
         <ul>
         {% for question in latest_question_list %}
-            <!-- <li><a href="{{ question.id }}/">{{ question.question_text }}</a></li> -->
-            <!-- <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li> -->
             <li><a href="{% url 'frm:detail' question.id %}">{{ question.question_text }}</a></li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No polls are available.</p>
-    {% endif %}
+    {% endif %} -->
 </body>
 </html>
